@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import SpaContents from './SpaContents';
+import SpaContents from './js/SpaContents';
 
 const root = ReactDOM.createRoot(document.getElementById("singlePageAppContents"));
 root.render(
