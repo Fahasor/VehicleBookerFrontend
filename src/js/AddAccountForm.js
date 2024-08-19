@@ -58,8 +58,8 @@ class AddAccountForm extends Component {
         return JSON.stringify(Object.fromEntries(formData));
     }
 
-    sendRequest(relativeUrlPath, toSend, method) { 
-        fetch(
+    async sendRequest(relativeUrlPath, toSend, method) { 
+        return await fetch(
             process.env.REACT_APP_BACKEND_HOST_URL + relativeUrlPath,
             {
                 headers: {
