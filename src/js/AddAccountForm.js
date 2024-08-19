@@ -78,13 +78,14 @@ class AddAccountForm extends Component {
         var formData = new FormData(document.getElementById("addAccountForm"));
         var humanType = formData.get("humanType");
         formData.delete(humanType);
+        var url = "";
 
         switch(humanType) {
             case 'user':
-                var url = "/users";
+                url = "/users";
             break;
             case 'driver':
-                var url = "/drivers";
+                url = "/drivers";
             break;
             default:
             console.log("unknown type of user detected");
