@@ -36,25 +36,13 @@ class AddAccountForm extends Component {
                         required
                     />
                 </p>
-                <div id="humanTypes">
-                    <p>
-                        <b>Тип аккаунта:</b>
-                    </p>
-                    <input
-                        type="radio"
-                        name="humanType"
-                        value="user"
-                        required
-                    />
-                    Пользователь
-                    <input
-                        type="radio"
-                        name="humanType"
-                        value="driver"
-                        required
-                    />
-                    Водитель
-                </div>
+                <select 
+                    name="humanType"
+                    required
+                >
+                    <option value="driver"> Водитель</option>
+                    <option value="user"> Пользователь</option>
+                </select>
                 <p>
                     <input
                         type="submit"
@@ -88,7 +76,7 @@ class AddAccountForm extends Component {
         e.preventDefault();
 
         var formData = new FormData(document.getElementById("addAccountForm"));
-        var humanType = formData.get("humanType")
+        var humanType = formData.get("humanType");
         formData.delete(humanType);
 
         switch(humanType) {
