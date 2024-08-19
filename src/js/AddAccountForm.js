@@ -81,14 +81,17 @@ class AddAccountForm extends Component {
 
         switch(humanType) {
             case 'user':
-                this.sendRequest("/users", this.formDataToJson(formData), "post");
+                var url = "/users";
             break;
             case 'driver':
-                this.sendRequest("/drivers", this.formDataToJson(formData), "post");
+                var url = "/drivers";
             break;
             default:
             console.log("unknown type of user detected");
+            return;
         }
+
+        this.sendRequest(url, this.formDataToJson(formData), "post");
     }
 }
 
