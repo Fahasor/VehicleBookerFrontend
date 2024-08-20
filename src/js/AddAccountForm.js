@@ -1,4 +1,5 @@
 import { Component } from "react";
+import HumanInfo from "./HumanInfo";
 
 class AddAccountForm extends Component {
     constructor(props) {
@@ -10,38 +11,13 @@ class AddAccountForm extends Component {
     render() {
         return (
             <form id="addAccountForm" onSubmit={this.handleSubmit}>
-                <input
-                    type="text"
-                    name="surname"
-                    placeholder="Введите фамилию"
-                    required
-                />
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Введите имя"
-                    required
-                />
-                <input
-                    type="text"
-                    name="patronymic"
-                    placeholder="Введите отчество"
-                    required
-                />
-                <p>
-                    <input
-                        type="tel"
-                        name="phoneNumber"
-                        placeholder="Введите номер телефона"
-                        required
-                    />
-                </p>
+                <HumanInfo/>
                 <select 
                     name="humanType"
                     required
                 >
-                    <option value="driver"> Водитель</option>
-                    <option value="user"> Пользователь</option>
+                    <option value="driver">Водитель</option>
+                    <option value="user">Пользователь</option>
                 </select>
                 <p>
                     <input
