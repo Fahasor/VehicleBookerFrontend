@@ -1,32 +1,14 @@
+import { useState } from "react";
 import HumanInfo from "./HumanInfo";
 
 export default function AddAccountForm() {
-    function formDataToJson(formData) {
-        return JSON.stringify(Object.fromEntries(formData));
-    }
-
-    async function sendRequest(relativeUrlPath, toSend, method) { 
-        return await fetch(
-            process.env.REACT_APP_BACKEND_HOST_URL + relativeUrlPath,
-            {
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                method: method,
-                body: toSend
-            }
-        );
-    }
+    const [human, setHuman] = useState({});
+    const [humanType, setHumanType] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
 
-        var formData = new FormData(document.getElementById("addAccountForm"));
-        var humanType = formData.get("humanType");
-        formData.delete(humanType);
-        var url = "";
-
+        let url = "";
         switch(humanType) {
             case 'user':
                 url = "/users";
@@ -35,19 +17,39 @@ export default function AddAccountForm() {
                 url = "/drivers";
             break;
             default:
-            console.log("unknown type of user detected");
+                console.log("unknown type of user detected");
             return;
-        }
-
-        sendRequest(url, formDataToJson(formData), "post");
+        }     
+        
+        fetch(
+            process.env.REACT_APP_BACKEND_HOST_URL + url,
+            {
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                method: "post",
+                body: human
+            }
+        );
     }
-
+                
+    function handleHumanChanged(key, value) {
+        setHuman({...human, [key]: value});
+    }
+    
+    function handleHumanTypeChange(e) {
+        setHumanType(e.target.value);
+    }
+                
     return (
-        <form id="addAccountForm" onSubmit={handleSubmit}>
-            <HumanInfo/>
+        <form onSubmit={handleSubmit}>
+            <HumanInfo human={human} onHumanChanged={handleHumanChanged}/>
             <select 
                 name="humanType"
+                value={humanType}
                 required
+                onChange={handleHumanTypeChange}
             >
                 <option value="driver">Водитель</option>
                 <option value="user">Пользователь</option>
