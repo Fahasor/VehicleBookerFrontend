@@ -1,71 +1,59 @@
-import { Component } from "react";
-
-class HumanInfo extends Component {
-    constructor(props) {
-        super(props);
-
-        this.onValueChanged = this.onValueChanged.bind(this);
+export default function HumanInfo(
+    {
+        human = {
+            surname: "",
+            name: "",
+            patronymic: "",
+            phoneNumber: "",
+        },
+        disabled = null,
+        onHumanChanged = null
+    }
+) {
+    function onValueChanged(e) {
+        onHumanChanged(e.target.name, e.target.value);
     }
 
-    render() {
-        return(
-            <div>
+    return(
+        <div>
+            <input
+                type="text"
+                name="surname"
+                value={human.surname}
+                placeholder="Введите фамилию"
+                onChange={onValueChanged}
+                required
+                disabled={disabled}
+            />
+            <input
+                type="text"
+                name="name"
+                value={human.name}
+                placeholder="Введите имя"
+                onChange={onValueChanged}
+                required
+                disabled={disabled}
+            />
+            <input
+                type="text"
+                name="patronymic"
+                value={human.patronymic}
+                placeholder="Введите отчество"
+                onChange={onValueChanged}
+                required
+                disabled={disabled}
+            />
+            <p>
                 <input
-                    type="text"
-                    name="surname"
-                    value={this.props.human.surname}
-                    placeholder="Введите фамилию"
-                    onChange={this.onValueChanged}
+                    type="tel"
+                    name="phoneNumber"
+                    value={human.phoneNumber}
+                    placeholder="Введите номер телефона"
+                    onChange={onValueChanged}
                     required
-                    disabled={this.props.disabled}
+                    disabled={disabled}
                 />
-                <input
-                    type="text"
-                    name="name"
-                    value={this.props.human.name}
-                    placeholder="Введите имя"
-                    onChange={this.onValueChanged}
-                    required
-                    disabled={this.props.disabled}
-                />
-                <input
-                    type="text"
-                    name="patronymic"
-                    value={this.props.human.patronymic}
-                    placeholder="Введите отчество"
-                    onChange={this.onValueChanged}
-                    required
-                    disabled={this.props.disabled}
-                />
-                <p>
-                    <input
-                        type="tel"
-                        name="phoneNumber"
-                        value={this.props.human.phoneNumber}
-                        placeholder="Введите номер телефона"
-                        onChange={this.onValueChanged}
-                        required
-                        disabled={this.props.disabled}
-                    />
-                </p>
-            </div>
-        )
-    }
-
-    onValueChanged(e) {
-        this.props.onHumanChange(e.target.name, e.target.value);
-    }
+            </p>
+        </div>
+    )
 }
-
-HumanInfo.defaultProps = {
-    human: {
-        surname: "",
-        name: "",
-        patronymic: "",
-        phoneNumber: "",
-        disabled: "",
-        onChange: null
-    }
-}
-
-export default HumanInfo;
