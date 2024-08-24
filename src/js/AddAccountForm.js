@@ -1,40 +1,11 @@
-import { Component } from "react";
 import HumanInfo from "./HumanInfo";
 
-class AddAccountForm extends Component {
-    constructor(props) {
-        super(props);
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    render() {
-        return (
-            <form id="addAccountForm" onSubmit={this.handleSubmit}>
-                <HumanInfo/>
-                <select 
-                    name="humanType"
-                    required
-                >
-                    <option value="driver">Водитель</option>
-                    <option value="user">Пользователь</option>
-                </select>
-                <p>
-                    <input
-                        type="submit"
-                        name="acceptButton"
-                        required
-                    />
-                </p>
-            </form>
-        )
-    }
-
-    formDataToJson(formData) {
+export default function AddAccountForm() {
+    function formDataToJson(formData) {
         return JSON.stringify(Object.fromEntries(formData));
     }
 
-    async sendRequest(relativeUrlPath, toSend, method) { 
+    async function sendRequest(relativeUrlPath, toSend, method) { 
         return await fetch(
             process.env.REACT_APP_BACKEND_HOST_URL + relativeUrlPath,
             {
@@ -48,7 +19,7 @@ class AddAccountForm extends Component {
         );
     }
 
-    handleSubmit(e) {
+    function handleSubmit(e) {
         e.preventDefault();
 
         var formData = new FormData(document.getElementById("addAccountForm"));
@@ -68,8 +39,26 @@ class AddAccountForm extends Component {
             return;
         }
 
-        this.sendRequest(url, this.formDataToJson(formData), "post");
+        sendRequest(url, formDataToJson(formData), "post");
     }
-}
 
-export default AddAccountForm;
+    return (
+        <form id="addAccountForm" onSubmit={handleSubmit}>
+            <HumanInfo/>
+            <select 
+                name="humanType"
+                required
+            >
+                <option value="driver">Водитель</option>
+                <option value="user">Пользователь</option>
+            </select>
+            <p>
+                <input
+                    type="submit"
+                    name="acceptButton"
+                    required
+                />
+            </p>
+        </form>
+    )
+}
