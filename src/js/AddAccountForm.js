@@ -61,11 +61,7 @@ export default function AddAccountForm() {
                 required
             /> Пользователь
             <p>
-                <input
-                    type="submit"
-                    name="acceptButton"
-                    required
-                />
+                <input type="submit"/>
             </p>
         </form>
     )

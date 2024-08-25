@@ -8,8 +8,7 @@ export default function HumanInfo(
         },
         disabled = null,
         onHumanChanged = null
-    }
-) {
+    }) {
     function onValueChanged(e) {
         onHumanChanged(e.target.name, e.target.value);
     }
