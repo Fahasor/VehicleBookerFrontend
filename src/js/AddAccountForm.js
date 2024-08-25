@@ -38,22 +38,28 @@ export default function AddAccountForm() {
         setHuman({...human, [key]: value});
     }
     
-    function handleHumanTypeChange(e) {
+    function handleAccountTypeClicked(e) {
+        console.log(`${e.target.value} clicked`);
         setHumanType(e.target.value);
     }
                 
     return (
         <form onSubmit={handleSubmit}>
             <HumanInfo human={human} onHumanChanged={handleHumanChanged}/>
-            <select 
-                name="humanType"
-                value={humanType}
+            <input
+                type="radio"
+                name="accountType"
+                value="driver"
+                onClick={handleAccountTypeClicked}
                 required
-                onChange={handleHumanTypeChange}
-            >
-                <option value="driver">Водитель</option>
-                <option value="user">Пользователь</option>
-            </select>
+            /> Водитель
+            <input
+                type="radio"
+                name="accountType"
+                value="user"
+                onClick={handleAccountTypeClicked}
+                required
+            /> Пользователь
             <p>
                 <input
                     type="submit"
