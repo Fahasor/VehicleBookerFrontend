@@ -1,7 +1,3 @@
-import { Component } from 'react';
-import AddAccountForm from './AddAccountForm';
-
-class SpaContents extends Component {
+export default function SpaContents() {
+    return(<div></div>);
 }
-
-export default SpaContents;
