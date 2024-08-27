@@ -7,10 +7,10 @@ export default function HumanInfo(
             phoneNumber: "",
         },
         disabled = null,
-        onHumanChanged = null
+        onHumanChange = null
     }) {
     function onValueChanged(e) {
-        onHumanChanged(e.target.name, e.target.value);
+        onHumanChange(e.target.name, e.target.value);
     }
 
     return(
