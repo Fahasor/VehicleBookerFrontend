@@ -24,9 +24,7 @@ export default function AccountRecord({human, url}) {
                 setHumanServerState(localHuman);
             }
             else {
-                response.json().then(
-                    json => {
-                        console.log(json);
+                response.json().then(json => {
                         switch(response.status) {
                             case 400:
                                 switch(json.message) {
