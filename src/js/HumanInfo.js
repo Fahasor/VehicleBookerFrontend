@@ -20,6 +20,7 @@ export default function HumanInfo(
                 name="surname"
                 value={human.surname}
                 placeholder="Введите фамилию"
+                autoComplete="off"
                 onChange={onValueChanged}
                 required
                 disabled={disabled}
@@ -29,6 +30,7 @@ export default function HumanInfo(
                 name="name"
                 value={human.name}
                 placeholder="Введите имя"
+                autoComplete="off"
                 onChange={onValueChanged}
                 required
                 disabled={disabled}
@@ -38,6 +40,7 @@ export default function HumanInfo(
                 name="patronymic"
                 value={human.patronymic}
                 placeholder="Введите отчество"
+                autoComplete="off"
                 onChange={onValueChanged}
                 required
                 disabled={disabled}
@@ -48,6 +51,7 @@ export default function HumanInfo(
                     name="phoneNumber"
                     value={human.phoneNumber}
                     placeholder="Введите номер телефона"
+                    autoComplete="off"
                     onChange={onValueChanged}
                     required
                     disabled={disabled}
