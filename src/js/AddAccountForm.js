@@ -2,7 +2,14 @@ import { useState } from "react";
 import HumanInfo from "./HumanInfo";
 
 export default function AddAccountForm() {
-    const [human, setHuman] = useState({});
+    const [human, setHuman] = useState(
+        {
+            name: "",
+            surname: "",
+            patronymic: "",
+            phoneNumber: "",
+        }
+    );
     const [humanType, setHumanType] = useState("");
 
     function handleSubmit(e) {
@@ -29,7 +36,7 @@ export default function AddAccountForm() {
                     "Content-Type": "application/json"
                 },
                 method: "post",
-                body: human
+                body: JSON.stringify(human)
             }
         );
     }
@@ -45,7 +52,7 @@ export default function AddAccountForm() {
                 
     return (
         <form onSubmit={handleSubmit}>
-            <HumanInfo human={human} onHumanChanged={handleHumanChanged}/>
+            <HumanInfo human={human} onHumanChange={handleHumanChanged}/>
             <input
                 type="radio"
                 name="accountType"
