@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AccountRecordList from "../AccountRecordList";
 import { assign } from "underscore";
 
-export default function AccountsListPage({url}) {
+export default function AccountsListPage({url, listElement}) {
     const [page, setPage] = useState([]);
 
     useEffect(() => {
@@ -34,8 +34,6 @@ export default function AccountsListPage({url}) {
     }
 
     return(
-        <div>
-            <AccountRecordList accountsArray={page} url={url} onAccountDelete={handleHumanDeleted}/>
-        </div>
+        <AccountRecordList accountsArray={page} url={url} onAccountDelete={handleHumanDeleted}/>
     )
 }
