@@ -2,7 +2,7 @@ import { useState } from "react";
 import HumanInfo from "./HumanInfo";
 import { isEqual } from "underscore";
 
-export default function AccountRecord({human, url, onHumanDelete}) {
+export default function AccountRecord({human, url, onAccountDelete}) {
     const [localHuman, setLocalHuman] = useState(human);
     const [humanServerState, setHumanServerState] = useState(human);
 
@@ -61,8 +61,32 @@ export default function AccountRecord({human, url, onHumanDelete}) {
                 method: "DELETE",
             }
         )
-
-        onHumanDelete(localHuman.id);
+        .then(
+            response => {
+                if(response.ok) {
+                    onAccountDelete(localHuman.id);
+                }
+                else {
+                    switch(response.status) {
+                        case 400:
+                            response.json().then(
+                                json => {
+                                    switch(json.message) {
+                                        case "":
+                                            alert("Аккаунт не может быть удалён, так как находится в связи с поездкой");
+                                        break;
+                                        default:
+                                            console.log(`unexpected error message: ${json.message}`);
+                                    }
+                                }
+                            )
+                        break;
+                        default:
+                            console.log(`unexpected status code: ${response.status}`);
+                     }
+                }
+            }
+        )
     }
 
     return(
