@@ -2,11 +2,11 @@ import { useState } from "react";
 import HumanInfo from "./HumanInfo";
 import { isEqual } from "underscore";
 
-export default function AccountRecord({human, url}) {
+export default function AccountRecord({human, url, onHumanDelete}) {
     const [localHuman, setLocalHuman] = useState(human);
     const [humanServerState, setHumanServerState] = useState(human);
 
-    function hamdleOnClick(e) {
+    function handleModifyClicked(e) {
         e.preventDefault();
 
         fetch(
@@ -48,14 +48,36 @@ export default function AccountRecord({human, url}) {
         setLocalHuman({...localHuman, [key]: value});
     }
 
+    function handleDeleteClicked(e) {
+        e.preventDefault();
+
+        fetch(
+            process.env.REACT_APP_BACKEND_HOST_URL + url + `?id=${localHuman.id}`,
+            {
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                method: "DELETE",
+            }
+        )
+
+        onHumanDelete(localHuman.id);
+    }
+
     return(
         <form>
             <HumanInfo human={localHuman} onHumanChange={handleHumanChange}/>
             <button
-                onClick={hamdleOnClick}
+                onClick={handleModifyClicked}
                 disabled={isEqual(localHuman, humanServerState)}
             >
                 Изменить
+            </button>
+            <button
+                onClick={handleDeleteClicked}
+            >
+                Удалить
             </button>
         </form>
     )
