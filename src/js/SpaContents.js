@@ -1,6 +1,7 @@
 import { useState } from "react";
-import AccountsListPage from "./pages/AccountsListPage";
 import AddAccountForm from "./AddAccountForm";
+import EntityListPage from "./pages/EntityListPage";
+import AccountRecord from "./AccountRecord";
 
 export default function SpaContents() {
     const [currentPage, setCurrentPage] = useState(<AddAccountForm/>);
@@ -14,12 +15,20 @@ export default function SpaContents() {
                     Регистрация
                 </button>
                 <button
-                    onClick = {() => setCurrentPage(<AccountsListPage url="/drivers"/>)}
+                    onClick = {() => setCurrentPage(
+                        <EntityListPage url="/drivers">
+                            <AccountRecord/>
+                        </EntityListPage>
+                    )}
                 >
                     Водители
                 </button>
                 <button
-                    onClick = {() => setCurrentPage(<AccountsListPage url="/users"/>)}
+                    onClick = {() => setCurrentPage(
+                        <EntityListPage url="/users">
+                            <AccountRecord/>
+                        </EntityListPage>
+                    )}
                 >
                     Пользователи
                 </button>

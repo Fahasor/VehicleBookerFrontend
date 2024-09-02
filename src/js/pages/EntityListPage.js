@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import AccountRecordList from "../AccountRecordList";
+import React, { useEffect, useState } from "react";
 import { assign } from "underscore";
 
-export default function AccountsListPage({url, listElement}) {
+export default function EntityListPage({url, children}) {
     const [page, setPage] = useState([]);
 
     useEffect(() => {
@@ -19,7 +18,7 @@ export default function AccountsListPage({url, listElement}) {
         .then(json => setPage(json.content));
     }, [url]);
 
-    function handleHumanDeleted(id) {
+    function handleEntityDeleted(id) {
         var newPage = [];
         let deleted;
 
@@ -34,6 +33,19 @@ export default function AccountsListPage({url, listElement}) {
     }
 
     return(
-        <AccountRecordList accountsArray={page} url={url} onAccountDelete={handleHumanDeleted}/>
+        <div>
+            {
+                page.map(entity =>
+                    React.cloneElement(
+                        children,
+                        {
+                            url: url,
+                            key: entity.id,
+                            entity: entity,
+                            onEntityDeleted: handleEntityDeleted
+                        })
+                )
+            }
+        </div>
     )
 }
