@@ -2,9 +2,9 @@ import { useState } from "react";
 import HumanInfo from "./HumanInfo";
 import { isEqual } from "underscore";
 
-export default function AccountRecord({human, url, onAccountDelete}) {
-    const [localHuman, setLocalHuman] = useState(human);
-    const [humanServerState, setHumanServerState] = useState(human);
+export default function AccountRecord({entity, url, onAccountDelete}) {
+    const [localEntity, setLocalEntity] = useState(entity);
+    const [entityServerState, setEntityServerState] = useState(entity);
 
     function handleModifyClicked(e) {
         e.preventDefault();
@@ -17,11 +17,11 @@ export default function AccountRecord({human, url, onAccountDelete}) {
                     "Content-Type": "application/json"
                 },
                 method: "PUT",
-                body: JSON.stringify(localHuman)
+                body: JSON.stringify(localEntity)
             }
         ).then(response => {
             if(response.ok) {
-                setHumanServerState(localHuman);
+                setEntityServerState(localEntity);
             }
             else {
                 response.json().then(json => {
@@ -44,15 +44,15 @@ export default function AccountRecord({human, url, onAccountDelete}) {
         })
     }
 
-    function handleHumanChange(key, value) {
-        setLocalHuman({...localHuman, [key]: value});
+    function handleEntityChange(key, value) {
+        setLocalEntity({...localEntity, [key]: value});
     }
 
     function handleDeleteClicked(e) {
         e.preventDefault();
 
         fetch(
-            process.env.REACT_APP_BACKEND_HOST_URL + url + `?id=${localHuman.id}`,
+            process.env.REACT_APP_BACKEND_HOST_URL + url + `?id=${localEntity.id}`,
             {
                 headers: {
                     "Accept": "application/json",
@@ -64,7 +64,7 @@ export default function AccountRecord({human, url, onAccountDelete}) {
         .then(
             response => {
                 if(response.ok) {
-                    onAccountDelete(localHuman.id);
+                    onAccountDelete(localEntity.id);
                 }
                 else {
                     switch(response.status) {
@@ -91,10 +91,10 @@ export default function AccountRecord({human, url, onAccountDelete}) {
 
     return(
         <form>
-            <HumanInfo human={localHuman} onHumanChange={handleHumanChange}/>
+            <HumanInfo human={localEntity} onHumanChange={handleEntityChange}/>
             <button
                 onClick={handleModifyClicked}
-                disabled={isEqual(localHuman, humanServerState)}
+                disabled={isEqual(localEntity, entityServerState)}
             >
                 Изменить
             </button>
