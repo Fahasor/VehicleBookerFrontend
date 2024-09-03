@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HumanInfo from "./HumanInfo";
+import HumanInfo from "./HumanModifier";
 
 export default function AddAccountForm() {
     const [human, setHuman] = useState(
