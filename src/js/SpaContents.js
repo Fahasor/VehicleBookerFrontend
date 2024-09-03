@@ -1,7 +1,7 @@
 import { useState } from "react";
 import AddAccountForm from "./AddAccountForm";
 import EntityListPage from "./pages/EntityListPage";
-import AccountRecord from "./AccountRecord";
+import HumanControl from "./HumanControl";
 
 export default function SpaContents() {
     const [currentPage, setCurrentPage] = useState(<AddAccountForm/>);
@@ -17,7 +17,7 @@ export default function SpaContents() {
                 <button
                     onClick = {() => setCurrentPage(
                         <EntityListPage url="/drivers">
-                            <AccountRecord/>
+                            <HumanControl/>
                         </EntityListPage>
                     )}
                 >
@@ -26,7 +26,7 @@ export default function SpaContents() {
                 <button
                     onClick = {() => setCurrentPage(
                         <EntityListPage url="/users">
-                            <AccountRecord/>
+                            <HumanControl/>
                         </EntityListPage>
                     )}
                 >

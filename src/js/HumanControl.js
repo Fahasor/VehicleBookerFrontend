@@ -2,7 +2,7 @@ import { useState } from "react";
 import HumanInfo from "./HumanInfo";
 import { isEqual } from "underscore";
 
-export default function AccountRecord({entity, url, onAccountDelete}) {
+export default function HumanControl({entity, url, onAccountDelete}) {
     const [localEntity, setLocalEntity] = useState(entity);
     const [entityServerState, setEntityServerState] = useState(entity);
 
