@@ -2,44 +2,20 @@ import { useState } from "react";
 import HumanInfo from "./modifiers/HumanModifier";
 import { isEqual } from "underscore";
 
-export default function HumanControl({entity, url, onAccountDelete}) {
+export default function HumanControl({entity, api, onAccountDelete}) {
     const [localEntity, setLocalEntity] = useState(entity);
     const [entityServerState, setEntityServerState] = useState(entity);
 
     function handleModifyClicked(e) {
         e.preventDefault();
 
-        fetch(
-            process.env.REACT_APP_BACKEND_HOST_URL + url,
-            {
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                method: "PUT",
-                body: JSON.stringify(localEntity)
-            }
-        ).then(response => {
+        api.update(localEntity)
+        .then(response => {
             if(response.ok) {
                 setEntityServerState(localEntity);
             }
             else {
-                response.json().then(json => {
-                        switch(response.status) {
-                            case 400:
-                                switch(json.message) {
-                                    case "database constraints violation":
-                                        alert("Пользователь с таким номером телефона уже существует");
-                                    break;
-                                    default:
-                                        console.log(`unexpected response message: ${json.message}`);
-                                }
-                            break;
-                            default:
-                                console.log(`unexpected status code: ${response.status}`);
-                        }
-                    }
-                )
+                alert("Что-то пошло не так");
             }
         })
     }
@@ -51,39 +27,14 @@ export default function HumanControl({entity, url, onAccountDelete}) {
     function handleDeleteClicked(e) {
         e.preventDefault();
 
-        fetch(
-            process.env.REACT_APP_BACKEND_HOST_URL + url + `?id=${localEntity.id}`,
-            {
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                method: "DELETE",
-            }
-        )
+        api.delete(localEntity.id)
         .then(
             response => {
                 if(response.ok) {
                     onAccountDelete(localEntity.id);
                 }
                 else {
-                    switch(response.status) {
-                        case 400:
-                            response.json().then(
-                                json => {
-                                    switch(json.message) {
-                                        case "":
-                                            alert("Аккаунт не может быть удалён, так как находится в связи с поездкой");
-                                        break;
-                                        default:
-                                            console.log(`unexpected error message: ${json.message}`);
-                                    }
-                                }
-                            )
-                        break;
-                        default:
-                            console.log(`unexpected status code: ${response.status}`);
-                     }
+                    alert("Что-то пошло не так");
                 }
             }
         )

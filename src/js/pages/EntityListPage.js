@@ -1,22 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { assign } from "underscore";
 
-export default function EntityListPage({url, children}) {
+export default function EntityListPage({url, children, api}) {
     const [page, setPage] = useState([]);
 
     useEffect(() => {
-        fetch(
-            process.env.REACT_APP_BACKEND_HOST_URL + url + "/all?pageNumber=0&pageSize=10",
-            {
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                method: "get"
-            })
+        api.getPage(0, 10)
         .then(response => response.json())
         .then(json => setPage(json.content));
-    }, [url]);
+    }, [url, api]);
 
     function handleEntityDeleted(id) {
         var newPage = [];

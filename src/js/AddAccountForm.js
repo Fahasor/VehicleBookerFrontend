@@ -1,5 +1,6 @@
 import { useState } from "react";
 import HumanInfo from "./modifiers/HumanModifier";
+import HumanApi from "./API/CrudApi";
 
 export default function AddAccountForm() {
     const [human, setHuman] = useState(
@@ -15,30 +16,17 @@ export default function AddAccountForm() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        let url = "";
         switch(humanType) {
             case 'user':
-                url = "/users";
+                (new HumanApi("/users")).create(human);
             break;
             case 'driver':
-                url = "/drivers";
+                (new HumanApi("/drivers")).create(human);
             break;
             default:
                 console.log("unknown type of user detected");
             return;
         }     
-        
-        fetch(
-            process.env.REACT_APP_BACKEND_HOST_URL + url,
-            {
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-                method: "post",
-                body: JSON.stringify(human)
-            }
-        );
     }
                 
     function handleHumanChanged(key, value) {

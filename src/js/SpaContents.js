@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddAccountForm from "./AddAccountForm";
 import EntityListPage from "./pages/EntityListPage";
 import HumanControl from "./HumanControl";
+import CrudApi from "./API/CrudApi";
 
 export default function SpaContents() {
     const [currentPage, setCurrentPage] = useState(<AddAccountForm/>);
@@ -15,20 +16,26 @@ export default function SpaContents() {
                     Регистрация
                 </button>
                 <button
-                    onClick = {() => setCurrentPage(
-                        <EntityListPage url="/drivers">
-                            <HumanControl/>
-                        </EntityListPage>
-                    )}
+                    onClick = {() => {
+                        let api = new CrudApi("/drivers");
+                        setCurrentPage(
+                            <EntityListPage api={api}>
+                                <HumanControl api={api}/>
+                            </EntityListPage>
+                        )
+                    }}
                 >
                     Водители
                 </button>
                 <button
-                    onClick = {() => setCurrentPage(
-                        <EntityListPage url="/users">
-                            <HumanControl/>
-                        </EntityListPage>
-                    )}
+                    onClick = {() => {
+                        let api = new CrudApi("/users");
+                        setCurrentPage(
+                            <EntityListPage api={api}>
+                                <HumanControl api={api}/>
+                            </EntityListPage>
+                        )
+                    }}
                 >
                     Пользователи
                 </button>
