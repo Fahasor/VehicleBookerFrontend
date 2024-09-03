@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HumanInfo from "./HumanModifier";
+import HumanInfo from "./modifiers/HumanModifier";
 import { isEqual } from "underscore";
 
 export default function HumanControl({entity, url, onAccountDelete}) {
