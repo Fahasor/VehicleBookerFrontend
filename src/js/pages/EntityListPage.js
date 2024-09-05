@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { assign } from "underscore";
 
-export default function EntityListPage({url, children, api}) {
+export default function EntityListPage({children, api}) {
     const [page, setPage] = useState([]);
 
     useEffect(() => {
         api.getPage(0, 10)
         .then(response => response.json())
         .then(json => setPage(json.content));
-    }, [url, api]);
+    }, [api]);
 
     function handleEntityDeleted(id) {
         var newPage = [];
@@ -31,7 +31,6 @@ export default function EntityListPage({url, children, api}) {
                     React.cloneElement(
                         children,
                         {
-                            url: url,
                             key: entity.id,
                             entity: entity,
                             onEntityDeleted: handleEntityDeleted
