@@ -27,7 +27,7 @@ export default function HumanControl({entity, api, onAccountDelete}) {
     function handleDeleteClicked(e) {
         e.preventDefault();
 
-        api.delete(localEntity.id)
+        api.deleteById(localEntity.id)
         .then(
             response => {
                 if(response.ok) {

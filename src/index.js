@@ -5,7 +5,7 @@ import SpaContents from './js/SpaContents';
 
 const root = ReactDOM.createRoot(document.getElementById("singlePageAppContents"));
 root.render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <SpaContents />
-  </React.StrictMode>
+  //</React.StrictMode>
 );
