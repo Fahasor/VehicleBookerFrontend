@@ -9,7 +9,7 @@ export default function SpaContents() {
     
     return(
         <>
-            <div>
+            <div className="navigator">
                 <button
                     onClick = {() => setCurrentPage(<AddAccountForm/>)}
                 >

@@ -39,7 +39,7 @@ export default function AddAccountForm() {
     }
                 
     return (
-        <form onSubmit={handleSubmit}>
+        <form>
             <HumanInfo human={human} onHumanChange={handleHumanChanged}/>
             <input
                 type="radio"
@@ -56,7 +56,11 @@ export default function AddAccountForm() {
                 required
             /> Пользователь
             <p>
-                <input type="submit"/>
+                <button
+                    onClick={handleSubmit}
+                >
+                    Отправить
+                </button>
             </p>
         </form>
     )
