@@ -1,6 +1,6 @@
-export default class HumanApi {
-    constructor(humanUrl) {
-        this.fetchUrl=process.env.REACT_APP_BACKEND_HOST_URL + humanUrl;
+export default class CrudApi {
+    constructor(fetchUrl) {
+        this.fetchUrl=process.env.REACT_APP_BACKEND_HOST_URL + fetchUrl;
     }
 
     sendRequest(requestType, data, url="") {
