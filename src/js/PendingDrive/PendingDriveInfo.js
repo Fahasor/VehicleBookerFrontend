@@ -5,6 +5,20 @@ export default function PendingDriveInfo({entity, api, onEntityDeleted}) {
     const [localEntity, setLocalEntity] = useState(entity);
     const [needDrawUsersList, setNeedDrawUsersList] = useState(false);
 
+    function onDriveRecordDeleteClicked(e) {
+        e.preventDefault();
+
+        api.deleteById(entity.id)
+        .then((response => {
+            if(response.ok) {
+                onEntityDeleted(entity.id);
+            }
+            else {
+                alert("Что-то пошло не так");
+            }
+        }))
+    }
+
     function onUserDeleteClicked(id) {
         let deleted;
         let newEntity = {};
@@ -74,6 +88,11 @@ export default function PendingDriveInfo({entity, api, onEntityDeleted}) {
                     }}
                 >
                     {needDrawUsersList? "Свернуть" : "Развернуть"}
+                </button>
+                <button
+                    onClick={onDriveRecordDeleteClicked}
+                >
+                    Удалить поездку
                 </button>
                 {drawUsersList()}
             </div>
