@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HumanInfo from "../modifiers/HumanModifier";
+import HumanModifier from "../modifiers/HumanModifier";
 
 export default function HumanForm({api}) {
     const [human, setHuman] = useState(
@@ -23,7 +23,7 @@ export default function HumanForm({api}) {
              
     return (
         <form onSubmit={handleSubmit}>
-            <HumanInfo human={human} onHumanChange={handleHumanChanged}/>
+            <HumanModifier human={human} onHumanChange={handleHumanChanged}/>
             <p>
                 <button
                     type="submit"
