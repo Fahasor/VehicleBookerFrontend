@@ -2,7 +2,7 @@ import { useState } from "react";
 import HumanModifier from "./modifiers/HumanModifier";
 import { isEqual } from "underscore";
 
-export default function HumanControl({entity, api, onAccountDelete}) {
+export default function HumanControl({entity, api, onEntityDeleted}) {
     const [localEntity, setLocalEntity] = useState(entity);
     const [entityServerState, setEntityServerState] = useState(entity);
 
@@ -31,7 +31,7 @@ export default function HumanControl({entity, api, onAccountDelete}) {
         .then(
             response => {
                 if(response.ok) {
-                    onAccountDelete(localEntity.id);
+                    onEntityDeleted(localEntity.id);
                 }
                 else {
                     alert("Что-то пошло не так");
