@@ -19,7 +19,7 @@ export default function HumanModifier(
                 type="text"
                 name="surname"
                 value={human.surname}
-                placeholder="Введите фамилию"
+                placeholder="Фамилия"
                 autoComplete="off"
                 onChange={onValueChanged}
                 required
@@ -29,7 +29,7 @@ export default function HumanModifier(
                 type="text"
                 name="name"
                 value={human.name}
-                placeholder="Введите имя"
+                placeholder="Имя"
                 autoComplete="off"
                 onChange={onValueChanged}
                 required
@@ -39,7 +39,7 @@ export default function HumanModifier(
                 type="text"
                 name="patronymic"
                 value={human.patronymic}
-                placeholder="Введите отчество"
+                placeholder="Отчество"
                 autoComplete="off"
                 onChange={onValueChanged}
                 required
@@ -50,7 +50,7 @@ export default function HumanModifier(
                     type="tel"
                     name="phoneNumber"
                     value={human.phoneNumber}
-                    placeholder="Введите номер телефона"
+                    placeholder="Номер телефона"
                     autoComplete="off"
                     onChange={onValueChanged}
                     required
