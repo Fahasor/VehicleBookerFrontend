@@ -1,4 +1,4 @@
-export default function HumanInfo(
+export default function HumanModifier(
     {
         human = {
             surname: "",

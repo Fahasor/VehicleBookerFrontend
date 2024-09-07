@@ -1,5 +1,5 @@
 import { useState } from "react";
-import HumanInfo from "./modifiers/HumanModifier";
+import HumanModifier from "./modifiers/HumanModifier";
 import { isEqual } from "underscore";
 
 export default function HumanControl({entity, api, onAccountDelete}) {
@@ -42,7 +42,7 @@ export default function HumanControl({entity, api, onAccountDelete}) {
 
     return(
         <form>
-            <HumanInfo human={localEntity} onHumanChange={handleEntityChange}/>
+            <HumanModifier human={localEntity} onHumanChange={handleEntityChange}/>
             <button
                 onClick={handleModifyClicked}
                 disabled={isEqual(localEntity, entityServerState)}
