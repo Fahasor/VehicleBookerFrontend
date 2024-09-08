@@ -10,21 +10,30 @@ export default function CreateEntityPage() {
     return(
         <div>
             <div>
-                <input
-                    type="radio"
-                    name="formType"
-                    onClick={() => setForm(<HumanForm api={new CrudApi("/drivers")}/>)}
-                /> Водитель
-                <input
-                    type="radio"
-                    name="formType"
-                    onClick={() => setForm(<HumanForm api={new CrudApi("/users")}/>)}
-                /> Пользователь
-                <input
-                    type="radio"
-                    name="formType"
-                    onClick={() => setForm(<PendingDriveForm api={new PendingDriveApi("/pending")}/>)}
-                /> Поездка
+                <label>
+                    <input
+                        type="radio"
+                        name="formType"
+                        onClick={() => setForm(<HumanForm api={new CrudApi("/drivers")}/>)}
+                    />
+                    Водитель
+                </label> 
+                <label>
+                    <input
+                        type="radio"
+                        name="formType"
+                        onClick={() => setForm(<HumanForm api={new CrudApi("/users")}/>)}
+                    /> 
+                    Пользователь
+                </label> 
+                <label> 
+                    <input
+                        type="radio"
+                        name="formType"
+                        onClick={() => setForm(<PendingDriveForm api={new PendingDriveApi("/pending")}/>)}
+                    />
+                    Поездка
+                </label> 
             </div>
             {form}
         </div>
