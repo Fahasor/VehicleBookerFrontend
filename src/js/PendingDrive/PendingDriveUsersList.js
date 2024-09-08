@@ -31,10 +31,7 @@ export default function PendingDriveUsersList({driveId, api, users, onUsersChang
                         disabled={true}
                     />
                     <button
-                        onClick={(e) => {
-                            e.preventDefault();
-                            onUserDeleted(index);
-                        }}
+                        onClick={() => onUserDeleted(index)}
                     >
                         Удалить
                     </button>
@@ -46,10 +43,7 @@ export default function PendingDriveUsersList({driveId, api, users, onUsersChang
     return(
         <div>
             <button
-                onClick={(e) => {
-                    e.preventDefault();
-                    setNeedDrawUsersList(!needDrawUsersList);
-                }}
+                onClick={() => setNeedDrawUsersList(!needDrawUsersList)}
             >
                 {needDrawUsersList? "Свернуть" : "Развернуть"}
             </button>
