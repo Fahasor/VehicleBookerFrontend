@@ -73,13 +73,19 @@ export default function PendingDriveInfo({entity, api, onEntityDeleted}) {
         }
     }
 
+    function convertDate(date) {
+        return new Date(Date.parse(date));
+    }
+
     return(
         <div>
             <HumanInfo
                 human={entity.driver}
                 disabled={true}
             />
-            {entity.departureDate}
+            {
+                convertDate(entity.departureDate).toLocaleString('ru')
+            }
             <div>
                 <button
                     onClick={(e) => {
