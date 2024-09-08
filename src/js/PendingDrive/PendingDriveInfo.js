@@ -1,6 +1,6 @@
 import { useState } from "react";
-import HumanInfo from "../modifiers/HumanModifier";
 import PendingDriveUsersList from "./PendingDriveUsersList";
+import DriveRecordDriverControl from "./DriveRecordDriverControl";
 
 export default function PendingDriveInfo({entity, api, onEntityDeleted}) {
     const [localEntity, setLocalEntity] = useState(entity);
@@ -23,15 +23,22 @@ export default function PendingDriveInfo({entity, api, onEntityDeleted}) {
         setLocalEntity({...localEntity, assignedUsers: newUsers});
     }
 
+    function handleDriverChanged(newDriver) {
+        setLocalEntity({...localEntity, driver: newDriver});
+    }
+
     function convertDate(date) {
         return new Date(Date.parse(date));
     }
-    console.log(api);
+
+    console.log(localEntity);
     return(
         <div>
-            <HumanInfo
-                human={entity.driver}
-                disabled={true}
+            <DriveRecordDriverControl
+                api={api}
+                driveId={localEntity.id}
+                driver={localEntity.driver}
+                onDriverChanged={handleDriverChanged}
             />
             <p>
                 <button
