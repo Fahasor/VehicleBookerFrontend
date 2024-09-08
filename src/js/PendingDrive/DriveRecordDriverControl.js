@@ -39,6 +39,7 @@ export default function DriveRecordDriverControl({api, driveId, driver, onDriver
             <div>
                 <input
                     type="tel"
+                    placeholder="Номер водителя"
                     value={newDriverPhone}
                     onChange={(e) => setNewDriverPhone(e.target.value)}
                 />
