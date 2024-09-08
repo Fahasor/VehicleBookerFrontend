@@ -31,7 +31,6 @@ export default function PendingDriveInfo({entity, api, onEntityDeleted}) {
         return new Date(Date.parse(date));
     }
 
-    console.log(localEntity);
     return(
         <div>
             <DriveRecordDriverControl

@@ -33,7 +33,6 @@ export default function DriveRecordDriverControl({api, driveId, driver, onDriver
         });
     }
 
-    console.log(driver);
     if(editingDriver) {
         return(
             <div>
